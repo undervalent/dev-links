@@ -1,14 +1,8 @@
 import React from 'react'
 import * as Styled from './styles'
+import { ButtonProps } from './types';
 
-interface IProps {
-  children: React.ReactNode
-  secondary?: boolean;
-  fullWidth?: boolean;
-  disabled?: boolean;
-}
-
-export const Button = ({children,...rest}:IProps) => {
+export const Button = ({children,...rest}:ButtonProps) => {
   return (
     <Styled.Button {...rest}>{children}</Styled.Button>
   )

@@ -1,12 +1,7 @@
 import styled from 'styled-components';
+import { ButtonProps } from './types';
 
-interface IProps {
-  secondary?: boolean;
-  fullWidth?: boolean;
-  disabled?: boolean;
-}
-
-export const Button = styled.button<IProps>`
+export const Button = styled.button<ButtonProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;

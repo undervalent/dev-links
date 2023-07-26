@@ -8,7 +8,7 @@ import LogoLarge from "../../assets/images/logo-devlinks-large.svg";
 import { AppProvider } from "../../lib/styles/theme-provider";
 import { Button, Input } from "@/app/components";
 import { z } from 'zod';
-import { generateFormErrors } from '@/app/lib/utils';
+import { useFormValidator } from '@/app/hooks';
 
 const formValidator = z.object({
   email: z.string().email(),
@@ -16,14 +16,9 @@ const formValidator = z.object({
 })
 
 export default function Home() {
-  const [errors, setErrors] = React.useState<formData>(null)
 
-  async function handleSubmit(e:any) {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const error = await generateFormErrors(data, formValidator);
-    setErrors(error)
-}
+  const [{ errors }, { handleSubmit }] = useFormValidator(formValidator);
+
   return (
     <AppProvider>
       <Styled.PageContainer>
@@ -42,7 +37,7 @@ export default function Home() {
               label="Email address"
               name="email"
               placeholder="e.g. alex@email.com"
-              type="text"
+              type="email"
               error={errors?.email}
             />
             <Input
@@ -53,7 +48,7 @@ export default function Home() {
               error={errors?.password}
             />
             <Styled.ButtonWrapper>
-              <Button fullWidth>Login</Button>
+              <Button fullWidth type='submit'>Login</Button>
             </Styled.ButtonWrapper>
           </Styled.FormRoot>
           <Styled.Footer>
